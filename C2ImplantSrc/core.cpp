@@ -120,9 +120,11 @@ std::string exec(const std::string& cmd) {
 	// Close the pipe
 	_pclose(pipe);
 
-	if (result.empty()) {
-		result = "not a valid command"; // Custom message if no output was returned
+	if (result.empty()) { // OPENED A PROCESS?
+		result = "DONE"; // Custom message if no output was returned
 	}
+
+	std::cout << "Result: " << result << std::endl;
 
 	return result;
 }
