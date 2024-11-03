@@ -3,7 +3,7 @@
 
 ## Overview
 
-C2ImplantSrc is a repository containing the implant code for a Command and Control (C2) system. This code is designed to facilitate communication between the C2 server and the implanted devices.
+C2ImplantSrc is a repository containing the implant code for a Command and Control (C2) system. This code is designed to facilitate communication between the C2 server and the implanted devices. It is used for the implant code to communicate with SimpleC2.
 
 ## Features
 
