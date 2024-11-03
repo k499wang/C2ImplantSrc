@@ -19,7 +19,6 @@ To install the implant code, open the solution file `C2ImplantSrc.sln` in Visual
 git clone https://github.com/yourusername/C2ImplantSrc.git
 cd C2ImplantSrc
 ```
-```
 
 ## License
 
