@@ -3,27 +3,27 @@
 
 ## Overview
 
-C2ImplantSrc is a repository containing the implant code for a Command and Control (C2) system. This code is designed to facilitate communication between the C2 server and the implanted devices. It is used for the implant code to communicate with SimpleC2.
+C2ImplantSrc is developed to enable secure and reliable communication between the **C2 server** and **implanted devices**. This project supports the core functionalities required for devices to connect to and receive commands from the **SimpleC2** server.
 
 ## Features
 
-- HTTP communication with CURL.
-- WINAPI use to get system information and Ip information.
-- Asynchronously executes tasks.
+- **HTTP Communication**: Uses `cURL` for reliable HTTP requests to communicate with the C2 server.
+- **System Information Retrieval**: Leverages `WinAPI` to collect and transmit system and IP information.
+- **Asynchronous Task Execution**: Executes tasks asynchronously to ensure smooth operation and responsiveness.
 
 ## Installation
 
-To install the implant code, open the solution file `C2ImplantSrc.sln` in Visual Studio and build the project. Make sure to modify the variables in variables.h. Modify the URLs to match your server URL and modify the ID to match your Implant ID.
+1. **Clone the repository**:
+    ```sh
+    git clone https://github.com/yourusername/C2ImplantSrc.git
+    cd C2ImplantSrc
+    ```
 
-```sh
-git clone https://github.com/yourusername/C2ImplantSrc.git
-cd C2ImplantSrc
-```
+2. **Open and Build the Project**:
+   - Open the solution file `C2ImplantSrc.sln` in Visual Studio.
+   - Build the project to create the implant executable.
 
-## License
-
-This project is licensed under the MIT License. See the `LICENSE` file for more details.
-
-## Contact
-
-For any questions or issues, please contanct k499wang@uwaterloo.ca
+3. **Modify Configuration**:
+   - Update variables in `variables.h` to match your server’s configuration:
+     - Set the URLs to point to your SimpleC2 server.
+     - Adjust the Implant ID to match your setup.
