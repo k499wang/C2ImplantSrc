@@ -12,6 +12,7 @@ using json = nlohmann::json;
 class Implant {
 public:
 	Implant(BasicUserInformation& basicUserInfo);
+	~Implant();
 
 	void RegisterImplant();
 	void StartBeacon();

